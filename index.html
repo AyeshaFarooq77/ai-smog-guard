@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Smog Health Guide</title>
+  <meta name="description" content="Live air quality turned into plain, personal health guidance in Urdu, Roman Urdu and English.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=Public+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body data-band="">
+
+  <header class="site-header">
+    <a class="brand" href="#top">AI Smog Health Guide</a>
+    <nav class="nav" aria-label="Main">
+      <a href="#tool">Check my air</a>
+      <a href="#how">How it works</a>
+      <a href="#who">Who it helps</a>
+    </nav>
+  </header>
+
+  <main id="top">
+
+    <section class="hero">
+      <div class="hero-inner">
+        <div class="hero-copy">
+          <h1>What today's air means for your body</h1>
+          <p class="lead">Everyone can see the AQI number. We turn it into plain advice for your age, your health and your work.</p>
+          <a class="cta" href="#tool">Check my air</a>
+        </div>
+
+        <aside class="aqi-card" aria-live="polite">
+          <p class="aqi-city"><span id="heroCity">Lahore</span> right now</p>
+          <p class="aqi-number" id="heroAqi">--</p>
+          <p class="aqi-band" id="heroBand">Loading live air quality</p>
+          <p class="aqi-note">Live data from Open-Meteo, US AQI scale.</p>
+        </aside>
+      </div>
+    </section>
+
+    <section class="tool" id="tool">
+      <div class="wrap">
+        <h2>Check your air</h2>
+        <p class="section-sub">Choose your city and tell us a little about yourself. Nothing is stored.</p>
+
+        <div class="tool-grid">
+
+          <div class="panel form-panel">
+            <div class="grid">
+              <label>City
+                <select id="city">
+                  <option>Lahore</option><option>Karachi</option><option>Islamabad</option>
+                  <option>Faisalabad</option><option>Multan</option><option>Rawalpindi</option><option>Peshawar</option>
+                </select>
+              </label>
+              <label>AQI (live, you can edit it)
+                <input id="aqi" type="number" min="0" max="1000" placeholder="loading...">
+              </label>
+              <label>Age group
+                <select id="age">
+                  <option value="child (under 12)">Child (under 12)</option>
+                  <option value="teenager">Teenager</option>
+                  <option value="adult" selected>Adult</option>
+                  <option value="elderly (60+)">Elderly (60+)</option>
+                </select>
+              </label>
+              <label>Language
+                <select id="lang">
+                  <option>Roman Urdu</option>
+                  <option>اردو (Urdu script)</option>
+                  <option>English</option>
+                </select>
+              </label>
+            </div>
+
+            <fieldset>
+              <legend>Any existing health condition?</legend>
+              <label class="chk"><input type="checkbox" value="asthma"> Asthma</label>
+              <label class="chk"><input type="checkbox" value="heart condition"> Heart condition</label>
+              <label class="chk"><input type="checkbox" value="pregnancy"> Pregnancy</label>
+              <label class="chk"><input type="checkbox" value="cough / breathing problems"> Cough or breathing problems</label>
+              <label class="chk"><input type="checkbox" id="outdoor"> I work outdoors</label>
+            </fieldset>
+
+            <button id="btn" class="primary">Get my guidance</button>
+            <p id="status" class="status" role="status" aria-live="polite"></p>
+          </div>
+
+          <div class="panel result-panel">
+            <div id="result" class="result hidden" aria-live="polite">
+              <div id="badge" class="badge"></div>
+              <h3 id="headline" class="headline"></h3>
+              <p id="outside" class="fact"></p>
+              <p id="mask" class="fact"></p>
+
+              <div class="cols">
+                <div><h4>Do this</h4><ul id="do"></ul></div>
+                <div><h4>Avoid this</h4><ul id="avoid"></ul></div>
+              </div>
+              <h4>At home</h4><ul id="home"></ul>
+
+              <div class="warn">
+                <h4>See a doctor or call 1122 if</h4>
+                <ul id="doctor"></ul>
+              </div>
+
+              <button id="speak" class="secondary">Read aloud</button>
+
+              <div class="ask">
+                <h4>Have a question?</h4>
+                <div class="ask-row">
+                  <input id="question" placeholder="For example: can I go for a walk tomorrow morning?">
+                  <button id="askBtn" class="primary">Ask</button>
+                </div>
+                <p id="answer" class="answer"></p>
+              </div>
+
+              <p class="disclaimer">This information is for general awareness only, not a diagnosis or treatment. If you feel unwell, please contact a doctor.</p>
+            </div>
+
+            <div id="empty" class="empty">
+              <p class="empty-title">Your guidance will appear here</p>
+              <p>Fill in the form and choose "Get my guidance". The AI reads today's AQI together with your profile.</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <section class="how" id="how">
+      <div class="wrap">
+        <h2>How it works</h2>
+        <ol class="steps">
+          <li>
+            <h3>We read the live air quality</h3>
+            <p>The AQI for your city comes from a live data source, not from a stored list.</p>
+          </li>
+          <li>
+            <h3>We look at who you are</h3>
+            <p>Your age group, any breathing or heart condition, pregnancy and outdoor work change how risky the same air is.</p>
+          </li>
+          <li>
+            <h3>The AI writes your guidance</h3>
+            <p>You get advice on going out, masks, home steps and warning signs, and you can ask follow-up questions.</p>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <section class="who" id="who">
+      <div class="wrap">
+        <h2>Who it helps</h2>
+        <dl class="groups">
+          <div><dt>Children</dt><dd>Smaller lungs and more time playing outside.</dd></div>
+          <div><dt>Older adults</dt><dd>Higher risk of heart and breathing problems on bad air days.</dd></div>
+          <div><dt>Pregnant women</dt><dd>Extra care is advised when air quality drops.</dd></div>
+          <div><dt>People with asthma or heart conditions</dt><dd>Smog can trigger symptoms even at moderate levels.</dd></div>
+          <div><dt>Outdoor workers</dt><dd>Riders, vendors and labourers cannot simply stay home.</dd></div>
+        </dl>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <p>AI Smog Health Guide is a prototype built for the STCS AI Hackathon at Minhaj University Lahore, under SDG 3: Good Health and Well-Being.</p>
+      <p>It gives general prevention guidance only. It does not diagnose or treat any condition.</p>
+    </div>
+  </footer>
+
+  <script src="/static/script.js"></script>
+</body>
+</html>
